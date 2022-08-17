@@ -117,7 +117,7 @@ class PrivateLayout extends Flux.DashView {
     this.currentPath = null;
     this.removeHistoryListener = null;
     this.state = {
-      showHideHR: true,
+      showHide: true,
       showRightBar: 0,
       showButtonBar: true,
       loading: true,
@@ -690,7 +690,7 @@ class PrivateLayout extends Flux.DashView {
   }
 
   render() {
-    const { showHideHR } = this.state;
+    const { showHide } = this.state;
     if (
       this.state.employer &&
       this.state.employer.active_subscription &&
@@ -763,7 +763,7 @@ class PrivateLayout extends Flux.DashView {
                 </NavLink>
               </li>
               <li>
-                {showHideHR && (
+                {showHide && (
                   <NavLink to="/talents">
                     <i className="icon icon-talents"></i>
                     <span style={{ fontSize: 16, fontWeight: 500 }}>
@@ -788,7 +788,7 @@ class PrivateLayout extends Flux.DashView {
                   </span>
                 </NavLink>
               </li>
-              {this.showPayroll()}
+              {showHide && (this.showPayroll())}
               <li>
                 <NavLink to="/profile" id="profilelink">
                   <i className="icon icon-companyprofile"></i>
@@ -1233,9 +1233,9 @@ class PrivateLayout extends Flux.DashView {
     );
   }
   hideComponent(admin) {
-    if (admin==="hradmin@jobcore.co") {
-      // this.setState({ showHideHR: false }); // uncommenting makes tap talent search is visible only to JC-HR@admin.co
-      console.log("showHideHR###", this.state.showHideHR)
+    if (admin!="hradmin@jobcore.co") {
+      this.setState({ showHide: false }); // uncommenting makes tap talent search is visible only to JC-HR@admin.co
+      console.log("showHide###", this.state.showHide)
       console.log("admin###", admin)
     } 
   }
